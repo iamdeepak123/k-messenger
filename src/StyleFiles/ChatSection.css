@@ -1,0 +1,184 @@
+.chatsection_conatiner {
+    width: 65%;
+    height: 95%;
+    border: 1px solid black;
+    box-sizing: border-box;
+
+    .chatnavbar {
+        height: 10%;
+        width: 100%;
+        /* border: 1px solid black; */
+        caret-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(151, 151, 221);
+
+        .imgs {
+            height: 100%;
+            width: 10%;
+            /* border: 1px solid black; */
+            display: flex;
+            justify-content: start;
+            align-items: center;
+
+            img {
+                height: 50px;
+                width: 50px;
+                border-radius: 50%;
+            }
+        }
+
+        .userinfo {
+            height: 100%;
+            width: 50%;
+            /* border: 1px solid black; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            h4 {
+                height: 40px;
+                width: 100%;
+                text-align: start;
+                align-content: center;
+            }
+        }
+
+        .icons {
+            width: 35%;
+            height: 100%;
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            gap: 20px;
+            /* border: 1px solid black; */
+            font-size: 30px;
+
+            .icon1 {
+                cursor: pointer;
+            }
+        }
+
+
+    }
+
+    .messageslist {
+        height: 82%;
+        width: 100%;
+        /* border: 1px solid rgb(189, 13, 13); */
+        box-sizing: border-box;
+        overflow-y: auto;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 15px;
+        caret-color: transparent;
+
+        .chats {
+            min-height: 10%;
+            width: 100%;
+            /* border: 1px solid red; */
+            display: flex;
+            justify-content: end;
+            align-items: center;
+
+
+            .userimg {
+                height: 100%;
+                width: 10%;
+                display: flex;
+                justify-content: end;
+                align-items: center;
+                /* border: 1px solid red; */
+
+                img {
+                    height: 50px;
+                    width: 50px;
+                }
+
+            }
+
+            .massage {
+                height: 100%;
+                width: 90%;
+                display: flex;
+                justify-content: start;
+                align-items: center;
+
+                p {
+                    min-height: 10%;
+                    width: 90%;
+                    background-color: rgb(102, 102, 246);
+                    margin-left: 10px;
+                    border-top-right-radius: 10px;
+                    border-bottom-right-radius: 10px;
+                    border-top-left-radius: 25px;
+                    padding: 10px;
+                    box-sizing: border-box;
+                    font-size: 15px;
+                   
+                }
+            }
+
+        }
+
+        .chats.active {
+            .userimg {
+                display: none;
+            }
+
+            .massage {
+                justify-content: end;
+
+                p {
+                    border-top-left-radius: 10px;
+                    border-bottom-left-radius: 10px;
+                    border-bottom-right-radius: 0px;
+                    border-top-right-radius: 25px;
+                    margin-right: 10px;
+                    background-color: blue;
+
+                }
+            }
+        }
+
+
+
+
+    }
+
+    .messageslist::-webkit-scrollbar {
+        height: 0px;
+        width: 0px;
+    }
+
+    .sendmessgaebox{
+        height: 8%;
+        width: 100%;
+       
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+
+        input{
+            width: 80%;
+            height: 100%;
+            box-sizing: border-box;
+            padding-left: 10px;
+            outline: none;
+            background: transparent;
+        }
+
+        button{
+            width: 20%;
+            height: 100%;
+            border: none;
+            background-color: green;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    }
+}

@@ -1,0 +1,95 @@
+.LoginPage_conatiner {
+    height: 500px;
+    width: 350px;
+    border: 1px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.34);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5.2px);
+    border: 1px solid rgba(255, 255, 255, 0.52);
+
+    form {
+        height: 70%;
+        width: 100%;
+        caret-color: transparent;
+        /* border: 1px solid red; */
+
+        h2 {
+            color: white;
+            font-size: 26px;
+            width: 100%;
+            height: 40px;
+            text-align: center;
+            margin: 0%;
+            padding: 0%;
+            /* border: 1px solid red; */
+            align-content: center;
+        }
+
+        input {
+            width: 250px;
+            height: 40px;
+            border: 2px solid white;
+            outline: none;
+            border-radius: 10px;
+            background: transparent;
+            font-size: 15px;
+
+        }
+
+        input:focus {
+            caret-color: black;
+        }
+
+        button {
+            width: 250px;
+            height: 35px;
+            border: none;
+            background: transparent;
+            border-radius: 5px;
+            background-color: blue;
+            font-size: 20px;
+            color: white;
+            cursor: pointer;
+            transition: 2s;
+        }
+
+        button:hover {
+            background-color: rgb(2, 2, 143);
+        }
+
+        span{
+            color: red;
+        }
+
+    }
+
+    .login_footer{
+        height: 25%;
+        width: 100%;
+        caret-color: transparent;
+        h5{
+            width: 100%;
+            height: 40px;
+            text-align: center;
+            align-content: center;
+
+            a{
+                text-decoration: none;
+                color: black;
+                cursor: pointer;
+                font-size: 16px;
+            }
+
+            a:hover{
+                color: blue;
+                text-decoration: underline;
+            }
+        }
+    }
+
+}

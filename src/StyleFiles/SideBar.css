@@ -1,0 +1,200 @@
+.Sidebar_Container {
+    width: 26%;
+    height: 95%;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    caret-color: transparent;
+    box-sizing: border-box;
+
+
+    .Searchbox_container {
+        height: 24%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        /* border: 1px solid red; */
+
+        .searchbox {
+            height: 30%;
+            width: 100%;
+            box-sizing: border-box;
+            /* border: 1px solid red; */
+
+            input {
+                width: 75%;
+                height: 100%;
+                background-color: transparent;
+                border: 2px solid black;
+                box-sizing: border-box;
+                padding: 5px;
+                outline: none;
+            }
+
+            input:focus {
+                caret-color: black;
+            }
+
+            button {
+                width: 25%;
+                height: 100%;
+                border: none;
+
+                cursor: pointer;
+                color: white;
+                font-size: 14px;
+                background-color: blue;
+            }
+        }
+
+        .useradd {
+            height: 35%;
+            width: 100%;
+            /* border: 1px solid red;  */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: aqua;
+
+
+            img {
+                height: 40px;
+                width: 40px;
+                border-radius: 50%;
+                border: none;
+
+            }
+
+            span {
+                height: 100%;
+                width: 60%;
+                /* border: 1px solid red;  */
+                align-content: center;
+                text-align: center;
+
+            }
+
+            button {
+                height: 70%;
+                width: 25%;
+                margin-right: 10px;
+                border-radius: 10px;
+                border: none;
+                font-size: 15px;
+                cursor: pointer;
+                color: white;
+                background-color: rgb(35, 199, 35);
+            }
+        }
+    }
+
+    .userlist {
+        height: 70%;
+        width: 100%;
+        /* border: 1px solid red; */
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+
+
+        .user {
+            height: 17%;
+            width: 100%;
+            /* border: 1px solid red;  */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: aqua;
+            cursor: pointer;
+            box-sizing: border-box;
+
+            .imgss {
+                width: 20%;
+                height: 100%;
+                display: flex;
+                justify-content: start;
+                align-items: center;
+                /* border: 1px solid red; */
+
+                img {
+                    height: 45px;
+                    width: 45px;
+                    border-radius: 50%;
+                    border: none;
+
+                }
+            }
+
+
+
+            span {
+                height: 100%;
+                width: 80%;
+                /* border: 1px solid red; */
+                align-content: center;
+                text-align: start;
+                padding-left: 10px;
+
+            }
+
+            button {
+                height: 70%;
+                width: 25%;
+                margin-right: 10px;
+                border-radius: 10px;
+                border: none;
+                font-size: 15px;
+                cursor: pointer;
+                color: white;
+                background-color: rgb(35, 199, 35);
+            }
+
+        }
+
+    }
+
+    .userlist::-webkit-scrollbar {
+        height: 0px;
+        width: 0px;
+    }
+
+    .logout {
+        height: 7%;
+        width: 100%;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+
+        button {
+            height: 90%;
+            width: 45%;
+            border: none;
+            color: white;
+            background-color: red;
+            border-radius: 0px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: 2s;
+
+            a{
+                text-decoration: none;
+                color: white;
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        button:hover {
+            background-color: rgb(156, 0, 0);
+        }
+    }
+}

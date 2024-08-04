@@ -1,0 +1,37 @@
+.navBar_container {
+    height: 10%;
+    width: 100%;
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid white;
+    background-color: rgb(151, 151, 221);
+
+    .brand_name {
+        width: 40%;
+        height: 90%;
+        /* border: 1px solid red; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+    }
+
+    .user_name {
+        width: 50%;
+        height: 90%;
+        /* border: 1px solid red; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+
+        img{
+            height: 40px;
+            width: 40px;
+            border: none;
+            border-radius: 50%;
+        }
+    }
+}
