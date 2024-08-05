@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import "../StyleFiles/SideBar.css"
 import NavBar from "../Components/NavBar"
 import imgs from "../Images/user.png"
 import { Link } from 'react-router-dom'
+import { UserContext } from '../Context/UserContext'
 const SideBar = () => {
+
+  const { findUser, username,signoutbtn } = useContext(UserContext);
+
+  const [name, setName] = useState("");
+
   return (
 
     <>
@@ -13,19 +19,55 @@ const SideBar = () => {
         <div className='Searchbox_container'>
 
           <div className="searchbox">
-            <input type="text" name="" id="" placeholder='Find new user' />
-            <button>Search</button>
+            <input type="text" name="" id="" placeholder='Find new user' value={name} onChange={(e) => setName(e.target.value)} />
+            <button onClick={() => findUser(name)} >Search</button>
           </div>
 
-          <div className="useradd">
+          {username && <div className="useradd">
             <img src={imgs} alt="" />
-            <span>Jone</span>
-            <button>ADD</button>
+            <span>{username.name}</span>
+            <button >ADD</button>
 
-          </div>
+          </div>}
         </div>
 
         <div className="userlist">
+
+          <div className="user">
+            <div className="imgss">
+              <img src={imgs} alt="" />
+            </div>
+            <span>Jone</span>
+          </div>
+
+          <div className="user">
+            <div className="imgss">
+              <img src={imgs} alt="" />
+            </div>
+            <span>Jone</span>
+          </div>
+
+          <div className="user">
+            <div className="imgss">
+              <img src={imgs} alt="" />
+            </div>
+            <span>Jone</span>
+          </div>
+
+          <div className="user">
+            <div className="imgss">
+              <img src={imgs} alt="" />
+            </div>
+            <span>Jone</span>
+          </div>
+
+          <div className="user">
+            <div className="imgss">
+              <img src={imgs} alt="" />
+            </div>
+            <span>Jone</span>
+          </div>
+
           <div className="user">
             <div className="imgss">
               <img src={imgs} alt="" />
@@ -38,49 +80,13 @@ const SideBar = () => {
               <img src={imgs} alt="" />
             </div>
             <span>Jone</span>
-
-          </div>
-          <div className="user">
-            <div className="imgss">
-              <img src={imgs} alt="" />
-            </div>
-            <span>Jone</span>
-
-          </div>
-          <div className="user">
-            <div className="imgss">
-              <img src={imgs} alt="" />
-            </div>
-            <span>Jone</span>
-
-          </div>
-          <div className="user">
-            <div className="imgss">
-              <img src={imgs} alt="" />
-            </div>
-            <span>Jone</span>
-
-          </div>
-          <div className="user">
-            <div className="imgss">
-              <img src={imgs} alt="" />
-            </div>
-            <span>Jone</span>
-
-          </div>
-          <div className="user">
-            <div className="imgss">
-              <img src={imgs} alt="" />
-            </div>
-            <span>Jone</span>
-
           </div>
 
 
         </div>
 
         <div className="logout">
-          <button><Link to="/">Logout</Link></button>
+          <button onClick={signoutbtn}><Link to="/">Logout</Link></button>
         </div>
 
 
