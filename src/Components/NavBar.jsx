@@ -1,15 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import "../StyleFiles/NavBar.css"
 import imgs from "../Images/user.png"
+import { AuthContext } from '../Context/AuthContext'
 const NavBar = () => {
+
+    // console.log(auth.currentUser);
+
+    const {currentUser} = useContext(AuthContext);
+
     return (
         <div className='navBar_container'>
             <div className="brand_name">
-                <span>K-Messanger</span>
+                <span>Messanger</span>
             </div>
             <div className="user_name">
                 <img src={imgs} alt="" />
-                <p>Deepak</p>
+                <p>{currentUser?.displayName}</p>
             </div>
         </div>
     )

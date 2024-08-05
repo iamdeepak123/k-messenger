@@ -1,25 +1,30 @@
-import React, { createContext, useReducer, useState } from 'react'
+import React, { createContext, useContext, useReducer, useState } from 'react'
 import reducer from "../Reducer/Reducer"
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, query, setDoc, where } from "firebase/firestore";
 import { auth, db } from "../Firebase";
-import { collection, query, where, getDocs } from "firebase/firestore";
 import Cookies from "universal-cookie";
+import { AuthContext } from './AuthContext';
 
 const UserContext = createContext();
 
 const UserContextProvider = ({ children }) => {
+
+    const { currentUser } = useContext(AuthContext);
+
+
     const Cookie = new Cookies();
-    const [username, setUsername] = useState("");
     const [registrationerr, setRegistrationerr] = useState(false);
     const [loginerr, setLoginerr] = useState(false);
     const [auths, setAuths] = useState(Cookie.get("auth-token"));
+    const [user, setUser] = useState("");
 
 
 
     const initialstate = {
 
     }
+
     //Loginbtn code//
     const handleLogin = async (e) => {
 
@@ -49,7 +54,6 @@ const UserContextProvider = ({ children }) => {
     }
 
     // registration//////////////////////////
-
     const handleRegistration = async (e) => {
         e.preventDefault();
         const displayName = e.target[0].value;
@@ -80,7 +84,6 @@ const UserContextProvider = ({ children }) => {
     }
 
     //signoutbtn/////////////
-
     const signoutbtn = async () => {
         await signOut(auth);
         Cookie.remove("auth-token");
@@ -88,29 +91,46 @@ const UserContextProvider = ({ children }) => {
         console.log(auth.currentUser);
     }
 
-    const findUser = async (name) => {
 
+    // const addchatlist = async () => {
+
+    //     if (currentUser === "null") return alert("Please Login first");
+
+    //     const combineID = user.id > currentUser.uid ? user.id + currentUser.uid : currentUser.uid + user.id;
+
+    //     console.log(combineID);
+
+    //     const res = await getDoc(doc(db, "chatlist", combineID));
+
+    //     if (!res.exists()) {
+
+    //         await setDoc(doc(db, "chatlist", combineID), { message: [] });
+    //     }
+
+
+
+    // }
+
+
+    const findUser = async (name, setName) => {
         const q = query(collection(db, "Userlist"), where("name", "==", name));
-
         const querySnapshot = await getDocs(q);
-
         querySnapshot.forEach((doc) => {
-
-
-            setUsername(doc.data());
-
-
-            const value = doc.data().id > auth.currentUser.uid ? doc.data().id + auth.currentUser.uid : auth.currentUser.uid + doc.data().id;
-
-            console.log(value);
+            setUser(doc.data());
+            console.log(doc.data());
+            // const value = doc.data().id > auth.currentUser.uid ? doc.data().id + auth.currentUser.uid : auth.currentUser.uid + doc.data().id;
         });
 
+        setName("");
+
     }
+
+
 
     const [state, dispatch] = useReducer(reducer, initialstate);
 
     return (
-        <UserContext.Provider value={{ ...state, handleLogin, auths, username, handleRegistration, signoutbtn, findUser, registrationerr, loginerr }}>
+        <UserContext.Provider value={{ ...state, handleLogin, auths, handleRegistration, signoutbtn, registrationerr, findUser, setUser, loginerr, user }}>
             {children}
         </UserContext.Provider>
     )

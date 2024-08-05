@@ -4,11 +4,37 @@ import NavBar from "../Components/NavBar"
 import imgs from "../Images/user.png"
 import { Link } from 'react-router-dom'
 import { UserContext } from '../Context/UserContext'
+import { collection, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore'
+import { db } from '../Firebase'
+import { AuthContext } from '../Context/AuthContext'
+
 const SideBar = () => {
 
-  const { findUser, username,signoutbtn } = useContext(UserContext);
+  const { signoutbtn,findUser,user,setUser } = useContext(UserContext);
+  const { currentUser } = useContext(AuthContext);
 
+  
   const [name, setName] = useState("");
+
+
+  const addchatlist = async () => {
+
+    if (currentUser === "null") return alert("Please Login first");
+
+    const combineID = user.id > currentUser.uid ? user.id + currentUser.uid : currentUser.uid + user.id;
+
+    console.log(combineID);
+
+    const res = await getDoc(doc(db, "chatlist", combineID));
+
+    if (!res.exists()) {
+
+        await setDoc(doc(db, "chatlist", combineID), { message: [] });
+    }
+
+    
+}
+
 
   return (
 
@@ -20,13 +46,13 @@ const SideBar = () => {
 
           <div className="searchbox">
             <input type="text" name="" id="" placeholder='Find new user' value={name} onChange={(e) => setName(e.target.value)} />
-            <button onClick={() => findUser(name)} >Search</button>
+            <button onClick={() => findUser(name, setName)} >Search</button>
           </div>
 
-          {username && <div className="useradd">
+          {user && <div className="useradd" onClick={addchatlist}>
             <img src={imgs} alt="" />
-            <span>{username.name}</span>
-            <button >ADD</button>
+            <span>{user.name}</span>
+
 
           </div>}
         </div>

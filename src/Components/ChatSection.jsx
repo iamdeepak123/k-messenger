@@ -1,11 +1,24 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import "../StyleFiles/ChatSection.css"
 import imgs from "../Images/user.png"
 import { FaVideo } from "react-icons/fa";
 import { IoMdCall } from "react-icons/io";
 import { IoMdMore } from "react-icons/io";
+import { setDoc, collection, doc, addDoc, orderBy, onSnapshot, query, serverTimestamp } from 'firebase/firestore';
+import { db } from '../Firebase'
+import { UserContext } from '../Context/UserContext';
+import { AuthContext } from '../Context/AuthContext'
+
 
 const ChatSection = () => {
+
+  const [message, setMessage] = useState("");
+
+  const { user ,auths} = useContext(UserContext);
+
+  const { currentUser } = useContext(AuthContext);
+
+  const [textdata, setTextData] = useState([]);
 
   const scrollbarref = useRef();
 
@@ -15,7 +28,64 @@ const ChatSection = () => {
 
   useEffect(() => {
     scrollToBottom();
+
+  })
+  console.log(user);
+
+  const sendMessagebtn = async (e) => {
+
+
+    const combineID = user.id > currentUser.uid ? user.id + currentUser.uid : currentUser.uid + user.id;
+
+    await setDoc(doc(db, "chatlist", combineID), {
+      name: currentUser.displayName,
+      text: message,
+      email: currentUser.email,
+      id: currentUser.uid,
+      photoURL: currentUser.photoURL,
+    },);
+
+    const val = doc(db, "chatlist", combineID);
+
+    const collectionval = collection(val, "Message");
+
+    addDoc(collectionval, {
+      name: currentUser.displayName,
+      text: message,
+      email: currentUser.email,
+      id: currentUser.uid,
+      photoURL: currentUser.photoURL,
+      createdAt: serverTimestamp(),
+    })
+
+    setMessage("");
+    // alert("data added");
+  }
+
+  useEffect(() => {
+    
+    // const combineID = user.id > currentUser.uid ? user.id + currentUser.uid : currentUser.uid + user.id;
+    // const val = doc(db, "chatlist", combineID);
+    // const collectionval = collection(val, "Message");
+    // const Query = query(collectionval, orderBy("createdAt"));
+    // var Unsub = onSnapshot(Query, (snap) => {
+    //   let mess = [];
+    //   snap.forEach((doc) => {
+    //     mess.push({ ...doc.data(), id: doc.id });
+    //   });
+    //   setTextData(mess);
+    // });
+    // return () => {
+    //   if (Unsub)
+    //     Unsub();
+
+    // }
+
+    
+
   });
+
+  console.log(textdata);
 
   return (
     <div className='chatsection_conatiner'>
@@ -36,111 +106,35 @@ const ChatSection = () => {
 
       <div className="messageslist">
 
-        <div className="chats">
-          <div className="userimg">
-            <img src={imgs} alt="" />
-          </div>
-          <div className="massage">
-            <p>Lorem sit amet bhbviv  hhdfd  dfbdihfd hfgdfdij skfdjf ddd  h
-              fbdfe dffjdbfdj</p>
-          </div>
-        </div>
+        {textdata.map((data) => {
+          return (
 
-        <div className="chats active">
-          <div className="userimg">
-            <img src={imgs} alt="" />
-          </div>
-          <div className="massage">
-            <p>Lorem sit amet bhbviv  hhdfd  dfbdihfd hfgdfdij skfdjf ddd  h
-              fbdfe dffjdbfdj</p>
-          </div>
-        </div>
+            <>
+              <div className={data.name === currentUser.displayName ? "chats active" : "chats"} key={data.id}>
+                <div className="userimg">
+                  <img src={imgs} alt="" />
+                </div>
+                <div className="massage">
+                  <p>{data.text}</p>
+                </div>
+              </div>
+            </>
+          )
 
-        <div className="chats">
-          <div className="userimg">
-            <img src={imgs} alt="" />
-          </div>
-          <div className="massage">
-            <p>Lorem sit amet bhbviv  hhdfd fdd d dfdi fda ffd idafhda ihdavfi fdahfifdafajfiayv8ycb ib udub bbdf dfjdfijdb fhdabfda n dfbdihfd hfgdfdij skfdjf ddd  h
-              fbdfe dffjdbfdj</p>
-          </div>
-        </div>
 
-        <div className="chats active">
-          <div className="userimg">
-            <img src={imgs} alt="" />
-          </div>
-          <div className="massage">
-            <p>Lorem sit amet bhbviv  hhdfd  dfbdihfd hfgdfdij skfdjf ddd  h
-              fbdfe dffjdbfdj</p>
-          </div>
-        </div>
-        <div className="chats">
-          <div className="userimg">
-            <img src={imgs} alt="" />
-          </div>
-          <div className="massage">
-            <p>Lorem sit amet bhbviv  hhdfd fdd d dfdi fda ffd idafhda ihdavfi fdahfifdafajfiayv8ycb ib udub bbdf dfjdfijdb fhdabfda n dfbdihfd hfgdfdij skfdjf ddd  h
-              fbdfe dffjdbfdj</p>
-             
-          </div>
-        </div>
 
-        <div className="chats active">
-          <div className="userimg">
-            <img src={imgs} alt="" />
-          </div>
-          <div className="massage">
-            <p>Lorem sit amet bhbviv  hhdfd  dfbdihfd hfgdfdij skfdjf ddd  h
-              fbdfe dffjdbfdj</p>
-          </div>
-        </div>
-        <div className="chats">
-          <div className="userimg">
-            <img src={imgs} alt="" />
-          </div>
-          <div className="massage">
-            <p>Lorem sit amet bhbviv  hhdfd fdd d dfdi fda ffd idafhda ihdavfi fdahfifdafajfiayv8ycb ib udub bbdf dfjdfijdb fhdabfda n dfbdihfd hfgdfdij skfdjf ddd  h
-              fbdfe dffjdbfdj</p>
-          </div>
-        </div>
+        })}
 
-        <div className="chats active">
-          <div className="userimg">
-            <img src={imgs} alt="" />
-          </div>
-          <div className="massage">
-            <p>Lorem sit amet bhbviv  hhdfd  dfbdihfd hfgdfdij skfdjf ddd  h
-              fbdfe dffjdbfdj</p>
-          </div>
-        </div>
 
-        <div className="chats">
-          <div className="userimg">
-            <img src={imgs} alt="" />
-          </div>
-          <div className="massage">
-            <p>Lorem sit amet bhbviv  hhdfd fdd d dfdi fda ffd idafhda ihdavfi fdahfifdafajfiayv8ycb ib udub bbdf dfjdfijdb fhdabfda n dfbdihfd hfgdfdij skfdjf ddd  h
-              fbdfe dffjdbfdj</p>
-          </div>
-        </div>
 
-        <div className="chats active">
-          <div className="userimg">
-            <img src={imgs} alt="" />
-          </div>
-          <div className="massage">
-            <p>Lorem sit amet bhbviv  hhdfd  dfbdihfd hfgdfdij skfdjf ddd  h
-              fbdfe dffjdbfdj</p>
-          </div>
-        </div>
+
 
         <div ref={scrollbarref}></div>
       </div>
 
       <div className="sendmessgaebox">
-        <input type="text" placeholder='Enter your message' />
-        <button>Send</button>
+        <input type="text" placeholder='Enter your message' value={message} onChange={(e) => setMessage(e.target.value)} />
+        <button onClick={sendMessagebtn}>Send</button>
       </div>
     </div>
   )
