@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useReducer, useState } from 'react'
+import React, { createContext, useContext, useEffect, useReducer, useState } from 'react'
 import reducer from "../Reducer/Reducer"
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut } from "firebase/auth";
-import { collection, doc, getDoc, getDocs, query, setDoc, where } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, onSnapshot, orderBy, query, setDoc, where } from "firebase/firestore";
 import { auth, db } from "../Firebase";
 import Cookies from "universal-cookie";
 import { AuthContext } from './AuthContext';
@@ -18,8 +18,9 @@ const UserContextProvider = ({ children }) => {
     const [loginerr, setLoginerr] = useState(false);
     const [auths, setAuths] = useState(Cookie.get("auth-token"));
     const [user, setUser] = useState("");
-
-
+    const [textdata, setTextData] = useState([]);
+    const [id, setId] = useState("")
+    const[chatname, setChatname] = useState("");
 
     const initialstate = {
 
@@ -91,30 +92,21 @@ const UserContextProvider = ({ children }) => {
         console.log(auth.currentUser);
     }
 
+    if (user.id != null) {
 
-    // const addchatlist = async () => {
+        var combineID = user.id > currentUser.uid ? user.id + currentUser.uid : currentUser.uid + user.id;
 
-    //     if (currentUser === "null") return alert("Please Login first");
+    }
 
-    //     const combineID = user.id > currentUser.uid ? user.id + currentUser.uid : currentUser.uid + user.id;
-
-    //     console.log(combineID);
-
-    //     const res = await getDoc(doc(db, "chatlist", combineID));
-
-    //     if (!res.exists()) {
-
-    //         await setDoc(doc(db, "chatlist", combineID), { message: [] });
-    //     }
+    //  console.log(combineID);
 
 
+    const FindUser = async (name, setName) => {
 
-    // }
-
-
-    const findUser = async (name, setName) => {
         const q = query(collection(db, "Userlist"), where("name", "==", name));
+
         const querySnapshot = await getDocs(q);
+
         querySnapshot.forEach((doc) => {
             setUser(doc.data());
             console.log(doc.data());
@@ -125,12 +117,40 @@ const UserContextProvider = ({ children }) => {
 
     }
 
+const addchatlist = async (id, Name) => {
 
+        const combineID = id > currentUser.uid ? id + currentUser.uid : currentUser.uid + id;
+    
+        setId(combineID);
+
+        setChatname(Name);
+     
+        
+    
+        const val = doc(db, "chatlist", combineID);
+        const collectionval = collection(val, "Message");
+        const Query = query(collectionval, orderBy("createdAt"));
+    
+        var Unsub = onSnapshot(Query, (snap) => {
+          let mess = [];
+          snap.forEach((doc) => {
+            mess.push({ ...doc.data(), id: doc.id });
+          });
+          setTextData(mess);
+        });
+      
+    
+    
+    
+     
+        
+    
+      }
 
     const [state, dispatch] = useReducer(reducer, initialstate);
 
     return (
-        <UserContext.Provider value={{ ...state, handleLogin, auths, handleRegistration, signoutbtn, registrationerr, findUser, setUser, loginerr, user }}>
+        <UserContext.Provider value={{ ...state, handleLogin, chatname ,auths, textdata,id, handleRegistration, signoutbtn, addchatlist, combineID, registrationerr, FindUser, setUser, loginerr, user }}>
             {children}
         </UserContext.Provider>
     )

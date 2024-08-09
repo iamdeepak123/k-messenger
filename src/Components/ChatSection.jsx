@@ -14,11 +14,11 @@ const ChatSection = () => {
 
   const [message, setMessage] = useState("");
 
-  const { user ,auths} = useContext(UserContext);
+  const {textdata,id, chatname} = useContext(UserContext);
 
   const { currentUser } = useContext(AuthContext);
 
-  const [textdata, setTextData] = useState([]);
+
 
   const scrollbarref = useRef();
 
@@ -30,19 +30,20 @@ const ChatSection = () => {
     scrollToBottom();
 
   })
-  console.log(user);
+  // console.log(user);
 
   const sendMessagebtn = async (e) => {
 
+    const combineID = id;
 
-    const combineID = user.id > currentUser.uid ? user.id + currentUser.uid : currentUser.uid + user.id;
-
+    if(id){
     await setDoc(doc(db, "chatlist", combineID), {
       name: currentUser.displayName,
       text: message,
       email: currentUser.email,
       id: currentUser.uid,
       photoURL: currentUser.photoURL,
+      time: serverTimestamp(),
     },);
 
     const val = doc(db, "chatlist", combineID);
@@ -59,83 +60,68 @@ const ChatSection = () => {
     })
 
     setMessage("");
-    // alert("data added");
+  
+  }else{
+    alert("select the user");
+  }
+  
   }
 
-  useEffect(() => {
-    
-    // const combineID = user.id > currentUser.uid ? user.id + currentUser.uid : currentUser.uid + user.id;
-    // const val = doc(db, "chatlist", combineID);
-    // const collectionval = collection(val, "Message");
-    // const Query = query(collectionval, orderBy("createdAt"));
-    // var Unsub = onSnapshot(Query, (snap) => {
-    //   let mess = [];
-    //   snap.forEach((doc) => {
-    //     mess.push({ ...doc.data(), id: doc.id });
-    //   });
-    //   setTextData(mess);
-    // });
-    // return () => {
-    //   if (Unsub)
-    //     Unsub();
+  // console.log(textdata);
 
-    // }
-
-    
-
-  });
-
-  console.log(textdata);
+  // console.log(combineID);
 
   return (
     <div className='chatsection_conatiner'>
-      <div className="chatnavbar">
-        <div className="imgs">
-          <img src={imgs} alt="" />
-        </div>
-        <div className="userinfo">
-          <h4>Rahul Singh </h4>
-        </div>
+      {id ?
+        <>
+          <div className="chatnavbar">
+            <div className="imgs">
+              <img src={imgs} alt="" />
+            </div>
+            <div className="userinfo">
+              <h4>{chatname} </h4>
+            </div>
 
-        <div className="icons">
-          <FaVideo className='icon1' />
-          <IoMdCall className='icon1' />
-          <IoMdMore className='icon1' />
-        </div>
-      </div>
+            <div className="icons">
+              <FaVideo className='icon1' />
+              <IoMdCall className='icon1' />
+              <IoMdMore className='icon1' />
+            </div>
+          </div>
 
-      <div className="messageslist">
+          <div className="messageslist">
 
-        {textdata.map((data) => {
-          return (
+            {textdata.map((data) => {
+              return (
 
-            <>
-              <div className={data.name === currentUser.displayName ? "chats active" : "chats"} key={data.id}>
-                <div className="userimg">
-                  <img src={imgs} alt="" />
-                </div>
-                <div className="massage">
-                  <p>{data.text}</p>
-                </div>
-              </div>
-            </>
-          )
+                <>
+                  <div className={data.name === currentUser.displayName ? "chats active" : "chats"} key={data.id}>
+                    <div className="userimg">
+                      <img src={imgs} alt="" />
+                    </div>
+                    <div className="massage">
+                      <p>{data.text}</p>
+                    </div>
+                  </div>
+                </>
+              )
 
+            })}
+            <div ref={scrollbarref}></div>
+          </div>
 
+          <div className="sendmessgaebox">
+            <input type="text" placeholder='Enter your message' value={message} onChange={(e) => setMessage(e.target.value)} />
+            <button onClick={sendMessagebtn}>Send</button>
+          </div>
 
-        })}
+        </>
 
+        :
+        <div>Hello to messgenger</div>
 
-
-
-
-        <div ref={scrollbarref}></div>
-      </div>
-
-      <div className="sendmessgaebox">
-        <input type="text" placeholder='Enter your message' value={message} onChange={(e) => setMessage(e.target.value)} />
-        <button onClick={sendMessagebtn}>Send</button>
-      </div>
+      }
     </div>
   )
 }
