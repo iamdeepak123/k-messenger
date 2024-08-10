@@ -23,7 +23,7 @@ const ChatSection = () => {
   const scrollbarref = useRef();
 
   const scrollToBottom = () => {
-    scrollbarref.current?.scrollIntoView({ behavior: "smooth" })
+    scrollbarref.current?.scrollIntoView({ behavior: "auto" })
   }
 
   useEffect(() => {
@@ -105,6 +105,7 @@ const ChatSection = () => {
               )
 
             })}
+
             <div ref={scrollbarref}></div>
           </div>
 
