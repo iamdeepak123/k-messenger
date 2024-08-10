@@ -4,7 +4,7 @@ import NavBar from "../Components/NavBar"
 import imgs from "../Images/user.png"
 import { Link } from 'react-router-dom'
 import { UserContext } from '../Context/UserContext'
-import { collection, doc, getDoc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, Timestamp, where } from 'firebase/firestore'
+import { collection, doc, onSnapshot, query, serverTimestamp, setDoc } from 'firebase/firestore'
 import { db } from '../Firebase'
 import { AuthContext } from '../Context/AuthContext'
 
@@ -13,15 +13,8 @@ const SideBar = () => {
 
   const { signoutbtn, FindUser, user, setUser, addchatlist } = useContext(UserContext);
   const { currentUser } = useContext(AuthContext);
-
-
   const [name, setName] = useState("");
   const [friend, setFriend] = useState([]);
-
-
-
-
-
 
   const addfriendlist = async () => {
 
@@ -51,8 +44,6 @@ const SideBar = () => {
 
   }
 
-
-
   useEffect(() => {
 
     const getfriendlist = async () => {
@@ -71,17 +62,9 @@ const SideBar = () => {
       });
 
     }
-
-
     getfriendlist();
 
-
   }, [currentUser.uid, user])
-
-
-
-
-  console.log(friend);
 
   return (
 

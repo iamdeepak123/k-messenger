@@ -4,7 +4,7 @@ import imgs from "../Images/user.png"
 import { AuthContext } from '../Context/AuthContext'
 const NavBar = () => {
 
-    // console.log(auth.currentUser);
+
 
     const {currentUser} = useContext(AuthContext);
 

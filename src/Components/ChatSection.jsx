@@ -4,7 +4,7 @@ import imgs from "../Images/user.png"
 import { FaVideo } from "react-icons/fa";
 import { IoMdCall } from "react-icons/io";
 import { IoMdMore } from "react-icons/io";
-import { setDoc, collection, doc, addDoc, orderBy, onSnapshot, query, serverTimestamp } from 'firebase/firestore';
+import { setDoc, collection, doc, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../Firebase'
 import { UserContext } from '../Context/UserContext';
 import { AuthContext } from '../Context/AuthContext'
@@ -20,8 +20,6 @@ const ChatSection = () => {
 
   const { currentUser } = useContext(AuthContext);
 
-
-
   const scrollbarref = useRef();
 
   const scrollToBottom = () => {
@@ -32,7 +30,7 @@ const ChatSection = () => {
     scrollToBottom();
 
   })
-  // console.log(user);
+
 
   const sendMessagebtn = async (e) => {
 
@@ -69,9 +67,6 @@ const ChatSection = () => {
 
   }
 
-  // console.log(textdata);
-
-  // console.log(combineID);
 
   return (
     <div className='chatsection_conatiner'>

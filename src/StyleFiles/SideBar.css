@@ -110,7 +110,6 @@
     .userlist {
         height: 70%;
         width: 100%;
-        /* border: 1px solid red; */
         overflow-y: auto;
         display: flex;
         flex-direction: column;

@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import "../StyleFiles/LoginPage.css"
 import { Link } from 'react-router-dom'
 import { UserContext } from '../Context/UserContext';
-import { Navigate } from 'react-router-dom';
 import Homepage from "../Components/Homepage"
 
 const LoginPage = () => {

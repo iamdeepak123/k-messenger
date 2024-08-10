@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useEffect, useReducer, useState } from 'react'
+import React, { createContext, useContext, useReducer, useState } from 'react'
 import reducer from "../Reducer/Reducer"
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut } from "firebase/auth";
-import { collection, doc, getDoc, getDocs, onSnapshot, orderBy, query, setDoc, where } from "firebase/firestore";
+import { collection, doc, getDocs, onSnapshot, orderBy, query, setDoc, where } from "firebase/firestore";
 import { auth, db } from "../Firebase";
 import Cookies from "universal-cookie";
 import { AuthContext } from './AuthContext';
