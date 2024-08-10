@@ -23,88 +23,84 @@
     margin: 0px;
     padding: 0%;
 
-    /* border: 1px solid rgb(17, 17, 17); */
+    /* border: 1px solid rgb(17, 17, 17); */   
+}
 
-    .searchbox {
-        height: 50%;
-        width: 100%;
+.searchbox {
+    height: 50%;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 10px;
+
+    input {
+        width: 75%;
+        height: 100%;
+        background-color: transparent;
+        /* border: 2px solid black; */
         box-sizing: border-box;
-        margin-top: 10px;
-
-        input {
-            width: 75%;
-            height: 100%;
-            background-color: transparent;
-            /* border: 2px solid black; */
-            box-sizing: border-box;
-            padding: 5px;
-            border: none;
-            background-color: rgba(52, 68, 76, 0.215);
-            outline: none;
-        }
-
-        input:focus {
-            caret-color: black;
-        }
-
-        ::placeholder {
-            color: white;
-            opacity: 1;
-            font-size: 14px;
-        }
-
-        button {
-            width: 25%;
-            height: 100%;
-            border: none;
-            cursor: pointer;
-            color: white;
-            font-size: 14px;
-            background-color: blue;
-        }
+        padding: 5px;
+        border: none;
+        background-color: rgba(52, 68, 76, 0.215);
+        outline: none;
     }
 
-    .useradd {
-        height: 45%;
-        width: 100%;
-        display: flex; 
-        justify-content: center;
-        align-items: center;
-        background-color: rgba(52, 68, 76, 0.5);
-
-
-        img {
-            height: 35px;
-            width: 35px;
-            border-radius: 50%;
-            border: none;
-        }
-
-        span {
-            height: 100%;
-            width: 60%;
-            /* border: 1px solid red;  */
-            align-content: center;
-            text-align: start;
-            margin-left: 10px;
-            font-size: 16px;
-        }
-
-        button {
-            height: 70%;
-            width: 25%;
-            margin-right: 10px;
-            border-radius: 5px;
-            border: none;
-            font-size: 13px;
-            cursor: pointer;
-            color: white;
-            background-color: rgb(35, 199, 35);
-        }
+    input:focus {
+        caret-color: black;
     }
 
-    .useradd.hide {
-        display: none;
+    ::placeholder {
+        color: white;
+        opacity: 1;
+        font-size: 14px;
+    }
+
+    button {
+        width: 25%;
+        height: 100%;
+        border: none;
+        cursor: pointer;
+        color: white;
+        font-size: 14px;
+        background-color: blue;
+    }
+}
+
+.useradd {
+    height: 45%;
+    width: 100%;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(52, 68, 76, 0.5);
+
+
+    img {
+        height: 35px;
+        width: 35px;
+        border-radius: 50%;
+        border: none;
+    }
+
+    span {
+        height: 100%;
+        width: 60%;
+        /* border: 1px solid red;  */
+        align-content: center;
+        text-align: start;
+        margin-left: 10px;
+        font-size: 16px;
+    }
+
+    button {
+        height: 70%;
+        width: 25%;
+        margin-right: 10px;
+        border-radius: 5px;
+        border: none;
+        font-size: 13px;
+        cursor: pointer;
+        color: white;
+        background-color: rgb(35, 199, 35);
     }
 }
 
