@@ -13,7 +13,11 @@ box-sizing: border-box;
   align-items: center;
   height: 100vh;
   width: 100%;
-  background-image: linear-gradient(180deg, #2af598 0%, #009efd 100%);
+  /* background-image: linear-gradient(180deg, #2af598 0%, #009efd 100%); */
+  background-image: url(./Images/bg_image2.jpg);
+  background-position:100%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .Mainpage {

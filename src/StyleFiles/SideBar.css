@@ -1,7 +1,7 @@
 .Sidebar_Container {
-    width: 26%;
+    width: 24%;
     height: 95%;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -9,7 +9,8 @@
     caret-color: transparent;
     box-sizing: border-box;
     border-radius: 10px;
-    
+    background-color: rgba(52, 68, 76, 0.204);
+
 
     .Searchbox_container {
         height: 16%;
@@ -18,18 +19,19 @@
         flex-direction: column;
         justify-content: start;
         align-items: center;
-       margin: 0px;
-       padding: 0%;
-       
+        margin: 0px;
+        padding: 0%;
+
         /* border: 1px solid rgb(17, 17, 17); */
 
         .searchbox {
-            height:50%;
+            height: 50%;
             width: 100%;
             box-sizing: border-box;
-            
+            margin-top: 10px;
+/* 
             border-top: 1px solid black;
-            border-bottom: 1px solid black;
+            border-bottom: 1px solid black; */
 
             input {
                 width: 75%;
@@ -39,12 +41,19 @@
                 box-sizing: border-box;
                 padding: 5px;
                 border: none;
+                background-color: rgba(52, 68, 76, 0.215);
                 outline: none;
             }
 
             input:focus {
                 caret-color: black;
             }
+
+            ::placeholder {
+                color: white;
+                opacity: 1;
+                font-size: 14px;
+              }
 
             button {
                 width: 25%;
@@ -64,7 +73,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: rgba(135, 165, 165, 0.288);
+            background-color: rgba(52, 68, 76, 0.5);
 
 
             img {
@@ -89,9 +98,9 @@
                 height: 70%;
                 width: 25%;
                 margin-right: 10px;
-                border-radius: 10px;
+                border-radius: 5px;
                 border: none;
-                font-size: 14px;
+                font-size: 13px;
                 cursor: pointer;
                 color: white;
                 background-color: rgb(35, 199, 35);
@@ -112,6 +121,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: start;
+        gap: 1px;
 
         h4 {
             padding: 0%;
@@ -126,11 +136,10 @@
         .user {
             height: 17%;
             width: 100%;
-            border-bottom: 1px solid rgb(243, 243, 243);
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: rgba(135, 165, 165, 0.288);
+            background-color: rgba(52, 68, 76, 0.5);
             cursor: pointer;
             box-sizing: border-box;
 

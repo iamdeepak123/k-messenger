@@ -4,7 +4,7 @@ import NavBar from "../Components/NavBar"
 import imgs from "../Images/user.png"
 import { Link } from 'react-router-dom'
 import { UserContext } from '../Context/UserContext'
-import { collection, doc, getDoc, getDocs, onSnapshot, orderBy, query, setDoc, where } from 'firebase/firestore'
+import { collection, doc, getDoc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, Timestamp, where } from 'firebase/firestore'
 import { db } from '../Firebase'
 import { AuthContext } from '../Context/AuthContext'
 
@@ -26,6 +26,15 @@ const SideBar = () => {
   const addfriendlist = async () => {
 
     const val = doc(db, "Friendlist", currentUser.uid);
+
+    await setDoc(val, {
+      name: user.name,
+      email: user.email,
+      id: user.id,
+      photoURL: user.photoURL,
+      createdAt: serverTimestamp(),
+    });
+
     const subcollectionRef1 = doc(val, "Mainlist", user.id);
 
     await setDoc(subcollectionRef1, {
@@ -33,6 +42,7 @@ const SideBar = () => {
       email: user.email,
       id: user.id,
       photoURL: user.photoURL,
+      createdAt: serverTimestamp(),
     });
 
     if (name === "") {
@@ -95,7 +105,7 @@ const SideBar = () => {
         </div>
 
         <div className="userlist">
-          <h4>Friends List ({friend.length})</h4>
+          <h4>{friend.length ? `Friends List (${friend.length})`: "Friends List"}</h4>
           {friend.map((data) => {
             return (
 

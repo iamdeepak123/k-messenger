@@ -57,9 +57,9 @@ const UserContextProvider = ({ children }) => {
     // registration//////////////////////////
     const handleRegistration = async (e) => {
         e.preventDefault();
-        const displayName = e.target[0].value;
-        const email = e.target[1].value;
-        const password = e.target[2].value;
+        let displayName = e.target[0].value;
+        let email = e.target[1].value;
+        let password = e.target[2].value;
 
         try {
             const res = await createUserWithEmailAndPassword(auth, email, password);
@@ -81,6 +81,9 @@ const UserContextProvider = ({ children }) => {
             console.log(error);
             setRegistrationerr(true)
         }
+
+        alert("Account Created, Please login Now.");
+
 
     }
 

@@ -8,13 +8,15 @@ import { setDoc, collection, doc, addDoc, orderBy, onSnapshot, query, serverTime
 import { db } from '../Firebase'
 import { UserContext } from '../Context/UserContext';
 import { AuthContext } from '../Context/AuthContext'
+import { IoMdChatbubbles } from "react-icons/io";
+
 
 
 const ChatSection = () => {
 
   const [message, setMessage] = useState("");
 
-  const {textdata,id, chatname} = useContext(UserContext);
+  const { textdata, id, chatname } = useContext(UserContext);
 
   const { currentUser } = useContext(AuthContext);
 
@@ -36,35 +38,35 @@ const ChatSection = () => {
 
     const combineID = id;
 
-    if(id &&message){
-    await setDoc(doc(db, "chatlist", combineID), {
-      name: currentUser.displayName,
-      text: message,
-      email: currentUser.email,
-      id: currentUser.uid,
-      photoURL: currentUser.photoURL,
-      time: serverTimestamp(),
-    },);
+    if (id && message) {
+      await setDoc(doc(db, "chatlist", combineID), {
+        name: currentUser.displayName,
+        text: message,
+        email: currentUser.email,
+        id: currentUser.uid,
+        photoURL: currentUser.photoURL,
+        time: serverTimestamp(),
+      },);
 
-    const val = doc(db, "chatlist", combineID);
+      const val = doc(db, "chatlist", combineID);
 
-    const collectionval = collection(val, "Message");
+      const collectionval = collection(val, "Message");
 
-    addDoc(collectionval, {
-      name: currentUser.displayName,
-      text: message,
-      email: currentUser.email,
-      id: currentUser.uid,
-      photoURL: currentUser.photoURL,
-      createdAt: serverTimestamp(),
-    })
+      addDoc(collectionval, {
+        name: currentUser.displayName,
+        text: message,
+        email: currentUser.email,
+        id: currentUser.uid,
+        photoURL: currentUser.photoURL,
+        createdAt: serverTimestamp(),
+      })
 
-    setMessage("");
-  
-  }else{
-    alert("Type a Message..");
-  }
-  
+      setMessage("");
+
+    } else {
+      alert("Type a Message..");
+    }
+
   }
 
   // console.log(textdata);
@@ -112,14 +114,25 @@ const ChatSection = () => {
           </div>
 
           <div className="sendmessgaebox">
-            <input type="text" placeholder='Enter your message' value={message} onChange={(e) => setMessage(e.target.value)} />
+            <input type="text" placeholder='Type your Message..' value={message} onChange={(e) => setMessage(e.target.value)} />
             <button onClick={sendMessagebtn}>Send</button>
           </div>
 
         </>
 
         :
-        <div>Hello to messgenger</div>
+        <div className='opening_msg'>
+
+          <div className="icon">
+            <IoMdChatbubbles className='penicon' />
+
+          </div>
+
+          <h3>Welcome to Messanger. Let Start Chatting</h3>
+
+
+
+        </div>
 
       }
     </div>
