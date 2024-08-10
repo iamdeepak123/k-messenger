@@ -124,8 +124,6 @@ const addchatlist = async (id, Name) => {
         setId(combineID);
 
         setChatname(Name);
-     
-        
     
         const val = doc(db, "chatlist", combineID);
         const collectionval = collection(val, "Message");
@@ -138,12 +136,7 @@ const addchatlist = async (id, Name) => {
           });
           setTextData(mess);
         });
-      
-    
-    
-    
-     
-        
+
     
       }
 

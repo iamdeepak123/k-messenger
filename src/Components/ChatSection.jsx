@@ -36,7 +36,7 @@ const ChatSection = () => {
 
     const combineID = id;
 
-    if(id){
+    if(id &&message){
     await setDoc(doc(db, "chatlist", combineID), {
       name: currentUser.displayName,
       text: message,
@@ -62,7 +62,7 @@ const ChatSection = () => {
     setMessage("");
   
   }else{
-    alert("select the user");
+    alert("Type a Message..");
   }
   
   }

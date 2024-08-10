@@ -5,8 +5,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid white;
     background-color: rgb(151, 151, 221);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 
     .brand_name {
         width: 40%;
@@ -16,10 +17,14 @@
         justify-content: center;
         align-items: center;
         font-size: 18px;
+
+        span{
+            font-size: 17px;
+        }
     }
 
     .user_name {
-        width: 50%;
+        width: 55%;
         height: 90%;
         /* border: 1px solid red; */
         display: flex;
@@ -32,6 +37,11 @@
             width: 40px;
             border: none;
             border-radius: 50%;
+        }
+
+        p{
+            font-size: 15px;
+           
         }
     }
 }

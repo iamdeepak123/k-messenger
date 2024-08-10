@@ -11,16 +11,16 @@ import { AuthContext } from '../Context/AuthContext'
 
 const SideBar = () => {
 
-  const { signoutbtn, FindUser, user, setUser ,addchatlist} = useContext(UserContext);
+  const { signoutbtn, FindUser, user, setUser, addchatlist } = useContext(UserContext);
   const { currentUser } = useContext(AuthContext);
 
 
   const [name, setName] = useState("");
   const [friend, setFriend] = useState([]);
-  const [textdata, setTextData] = useState([]);
 
 
- 
+
+
 
 
   const addfriendlist = async () => {
@@ -35,9 +35,13 @@ const SideBar = () => {
       photoURL: user.photoURL,
     });
 
+    if (name === "") {
+      setUser("");
+    }
+
   }
 
- 
+
 
   useEffect(() => {
 
@@ -45,24 +49,24 @@ const SideBar = () => {
 
       const val = doc(db, "Friendlist", currentUser.uid);
       const subcollectionRef1 = collection(val, "Mainlist");
-  
+
       const Query = query(subcollectionRef1);
-  
+
       const Unsub = onSnapshot(Query, (snap) => {
         let mess = [];
         snap.forEach((doc) => {
           mess.push({ ...doc.data(), id: doc.id });
         });
         setFriend(mess);
-      }); 
-  
+      });
+
     }
 
 
     getfriendlist();
 
-   
-  },[currentUser.uid, user])
+
+  }, [currentUser.uid, user])
 
 
 
@@ -78,11 +82,11 @@ const SideBar = () => {
         <div className='Searchbox_container'>
 
           <div className="searchbox">
-            <input type="text" name="" id="" placeholder='Find new user' value={name} onChange={(e) => setName(e.target.value)} />
+            <input type="text" name="" id="" placeholder='Add New User' value={name} onChange={(e) => setName(e.target.value)} />
             <button onClick={() => FindUser(name, setName)} >Search</button>
           </div>
 
-          {user && <div className="useradd">
+          {user && <div className="useradd"  >
             <img src={imgs} alt="" />
             <span>{user.name}</span>
             <button onClick={addfriendlist}>ADD</button>
@@ -91,7 +95,7 @@ const SideBar = () => {
         </div>
 
         <div className="userlist">
-
+          <h4>Friends List ({friend.length})</h4>
           {friend.map((data) => {
             return (
 
