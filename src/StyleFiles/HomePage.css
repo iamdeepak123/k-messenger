@@ -1,8 +1,8 @@
 .Home_container {
     display: flex;
     font-size: 20px;
-    height: 85%;
-    width: 75%;
+    height: 90%;
+    width: 85%;
     background: rgba(255, 255, 255, 0.24);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.01);
