@@ -43,7 +43,7 @@ h3{
 
 }
 
-@media (max-width: 1000px){
+@media (max-width: 880px){
     .Home_container {
         display: none;
 

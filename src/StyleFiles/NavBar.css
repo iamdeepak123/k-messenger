@@ -1,25 +1,25 @@
 .navBar_container {
     height: 10%;
     width: 100%;
-    gap: 10px;
+    gap: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: rgba(52, 68, 76, 0.364);
-        border-top-left-radius: 10px;
+    border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 
     .brand_name {
-        width: 40%;
+        width: 44%;
         height: 90%;
         /* border: 1px solid red; */
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 18px;
+        font-size: 17px;
 
-        span{
-            font-size: 17px;
+        span {
+            font-size: 16px;
         }
     }
 
@@ -32,16 +32,16 @@
         align-items: center;
         gap: 5px;
 
-        img{
-            height: 40px;
-            width: 40px;
+        img {
+            height: 35px;
+            width: 35px;
             border: none;
             border-radius: 50%;
         }
 
-        p{
+        p {
             font-size: 15px;
-           
+
         }
     }
 }
